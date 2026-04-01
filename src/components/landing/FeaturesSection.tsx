@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import {
   Bot,
   TrendingUp,
@@ -94,10 +91,8 @@ export default function FeaturesSection() {
             const Icon = feature.icon;
             const isEven = i % 2 === 0;
             return (
-              <motion.div
+              <div
                 key={feature.id}
-                initial={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.1 }}
                 className={`grid lg:grid-cols-2 gap-12 items-center ${
                   !isEven ? "lg:grid-flow-col-dense" : ""
                 }`}
@@ -126,7 +121,7 @@ export default function FeaturesSection() {
                     {feature.visual}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

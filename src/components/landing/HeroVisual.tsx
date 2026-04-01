@@ -1,15 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
-
 export default function HeroVisual() {
   return (
-    <motion.div
-      initial={{ opacity: 1, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-      className="relative"
-    >
+    <div className="relative animate-slide-up">
       {/* Browser chrome */}
       <div className="relative rounded-2xl border border-[hsl(0_0%_12%/0.5)] bg-[hsl(0_0%_4%/0.8)] backdrop-blur-sm overflow-hidden shadow-2xl">
         {/* Browser bar */}
@@ -146,6 +137,6 @@ export default function HeroVisual() {
         className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[60%] h-40 blur-[100px] rounded-full pointer-events-none"
         style={{ background: "hsl(43 48% 59% / 0.04)" }}
       />
-    </motion.div>
+    </div>
   );
 }
