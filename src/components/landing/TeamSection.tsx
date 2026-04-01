@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 
 import WalterImg from "@/assets/team/Walter.jpg";
@@ -43,11 +42,7 @@ export default function TeamSection() {
     <section id="team" className="py-32 lg:py-48">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 1, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-24"
         >
           <span className="text-xs font-medium text-[hsl(43_48%_59%)] tracking-widest uppercase">
@@ -56,15 +51,9 @@ export default function TeamSection() {
           <h2 className="text-4xl sm:text-5xl font-bold text-[hsl(0_0%_90%)] mt-5">
             Das Team hinter der Plattform
           </h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 1, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start"
-        >
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
           {/* Photo grid — staggered 3 columns */}
           <div className="flex gap-4 w-full lg:w-3/5">
             {/* Column 1 — offset top */}
@@ -113,7 +102,7 @@ export default function TeamSection() {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

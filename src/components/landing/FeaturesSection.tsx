@@ -96,9 +96,7 @@ export default function FeaturesSection() {
             return (
               <motion.div
                 key={feature.id}
-                initial={{ opacity: 1, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
+                initial={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 className={`grid lg:grid-cols-2 gap-12 items-center ${
                   !isEven ? "lg:grid-flow-col-dense" : ""

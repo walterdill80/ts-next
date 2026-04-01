@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 export default function CtaSection() {
@@ -13,13 +10,7 @@ export default function CtaSection() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-        <motion.div
-          initial={{ opacity: 1, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col items-center gap-6"
-        >
+        <div className="flex flex-col items-center gap-6">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[hsl(0_0%_90%)]">
             Bereit für ein{" "}
             <span className="text-gradient-gold">
@@ -39,7 +30,7 @@ export default function CtaSection() {
             Jetzt starten
             <ArrowRight className="w-4 h-4" />
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
