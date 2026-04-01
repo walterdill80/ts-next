@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: hsl(0 0% 2%);
+  --foreground: hsl(0 0% 90%);
+  --card: hsl(0 0% 5%);
+  --card-foreground: hsl(0 0% 90%);
+  --popover: hsl(0 0% 5%);
+  --popover-foreground: hsl(0 0% 90%);
+  --primary: hsl(43 48% 59%);
+  --primary-foreground: hsl(0 0% 2%);
+  --secondary: hsl(0 0% 8%);
+  --secondary-foreground: hsl(0 0% 90%);
+  --muted: hsl(0 0% 12%);
+  --muted-foreground: hsl(0 0% 55%);
+  --accent: hsl(43 48% 59%);
+  --accent-foreground: hsl(0 0% 2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --border: hsl(0 0% 12%);
+  --input: hsl(0 0% 12%);
+  --ring: hsl(43 48% 59%);
+  --radius: 0.5rem;
+  --gold: hsl(43 48% 59%);
+  --gold-bright: hsl(43 60% 72%);
+  --surface: hsl(0 0% 6%);
+  --surface-hover: hsl(0 0% 9%);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(43 48% 59%), hsl(43 60% 72%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .glow-gold {
+    box-shadow: 0 0 60px -12px hsl(43 48% 59% / 0.25);
+  }
+  .border-gold {
+    border-color: hsl(43 48% 59% / 0.2);
+  }
+  .bg-surface {
+    background-color: var(--surface);
+  }
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
