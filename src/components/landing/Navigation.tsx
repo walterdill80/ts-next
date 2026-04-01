@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/TS_Logo_White.png";
 
@@ -140,82 +139,79 @@ export default function Navigation() {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
+      {/* Mobile Drawer — CSS transitions, no Framer Motion */}
+      <div
+        className={`fixed inset-0 z-50 transition-opacity duration-200 ${
+          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* Drawer panel */}
+        <div
+          className={`absolute top-0 right-0 bottom-0 w-80 bg-[hsl(0_0%_4%)] border-l border-[hsl(0_0%_12%)] flex flex-col transition-transform duration-300 ease-out ${
+            mobileOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          {/* Drawer Header */}
+          <div className="flex items-center justify-between p-6 border-b border-[hsl(0_0%_12%)]">
+            <Image src={logo} alt="Trading Strategen" height={36} />
+            <button
               onClick={() => setMobileOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30, stiffness: 300 }}
-              className="fixed top-0 right-0 bottom-0 z-50 w-80 bg-[hsl(0_0%_4%)] border-l border-[hsl(0_0%_12%)] flex flex-col"
+              className="text-[hsl(0_0%_55%)] hover:text-[hsl(0_0%_90%)] transition-colors"
+              aria-label="Menü schließen"
             >
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between p-6 border-b border-[hsl(0_0%_12%)]">
-                <Image src={logo} alt="Trading Strategen" height={36} />
-                <button
-                  onClick={() => setMobileOpen(false)}
-                  className="text-[hsl(0_0%_55%)] hover:text-[hsl(0_0%_90%)] transition-colors"
-                  aria-label="Menü schließen"
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Drawer Nav */}
+          <nav className="flex flex-col gap-1 p-4 flex-1">
+            {navLinks.map((link) => (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link.href)}
+                className="text-left px-4 py-3 text-[hsl(0_0%_75%)] hover:text-[hsl(0_0%_90%)] hover:bg-[hsl(0_0%_8%)] rounded-md transition-colors text-base cursor-pointer"
+              >
+                {link.label}
+              </button>
+            ))}
+            <div className="pt-4 mt-4 border-t border-[hsl(0_0%_12%)]">
+              <button
+                onClick={() => handleNavClick("#preise")}
+                className="w-full px-4 py-3 text-sm font-medium rounded-md bg-[hsl(43_48%_59%)] text-[hsl(0_0%_2%)] hover:bg-[hsl(43_48%_65%)] transition-colors cursor-pointer"
+              >
+                Jetzt starten
+              </button>
+            </div>
+          </nav>
+
+          {/* Social Links */}
+          <div className="p-6 border-t border-[hsl(0_0%_12%)]">
+            <p className="text-xs text-[hsl(0_0%_40%)] uppercase tracking-widest mb-3">
+              Folge uns
+            </p>
+            <div className="flex items-center gap-3 flex-wrap">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-[hsl(0_0%_45%)] hover:text-[hsl(43_48%_59%)] transition-colors"
                 >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Drawer Nav */}
-              <nav className="flex flex-col gap-1 p-4 flex-1">
-                {navLinks.map((link) => (
-                  <button
-                    key={link.label}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-left px-4 py-3 text-[hsl(0_0%_75%)] hover:text-[hsl(0_0%_90%)] hover:bg-[hsl(0_0%_8%)] rounded-md transition-colors text-base cursor-pointer"
-                  >
-                    {link.label}
-                  </button>
-                ))}
-                <div className="pt-4 mt-4 border-t border-[hsl(0_0%_12%)]">
-                  <button
-                    onClick={() => handleNavClick("#preise")}
-                    className="w-full px-4 py-3 text-sm font-medium rounded-md bg-[hsl(43_48%_59%)] text-[hsl(0_0%_2%)] hover:bg-[hsl(43_48%_65%)] transition-colors cursor-pointer"
-                  >
-                    Jetzt starten
-                  </button>
-                </div>
-              </nav>
-
-              {/* Social Links */}
-              <div className="p-6 border-t border-[hsl(0_0%_12%)]">
-                <p className="text-xs text-[hsl(0_0%_40%)] uppercase tracking-widest mb-3">
-                  Folge uns
-                </p>
-                <div className="flex items-center gap-3 flex-wrap">
-                  {socialLinks.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={s.label}
-                      className="text-[hsl(0_0%_45%)] hover:text-[hsl(43_48%_59%)] transition-colors"
-                    >
-                      {s.icon}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

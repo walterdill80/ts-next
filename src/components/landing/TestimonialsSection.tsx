@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, ExternalLink } from "lucide-react";
 import Image, { StaticImageData } from "next/image";
 
@@ -49,8 +48,8 @@ export default function TestimonialsSection() {
 
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
 
-  // Responsive visible count
   useEffect(() => {
     const update = () => setVisibleCount(getVisibleCount(window.innerWidth));
     update();
@@ -86,7 +85,6 @@ export default function TestimonialsSection() {
     pauseAutoPlay();
   }, [maxIndex, pauseAutoPlay]);
 
-  // Auto-play
   useEffect(() => {
     if (!isAutoPlaying || isHovered) {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
@@ -108,9 +106,16 @@ export default function TestimonialsSection() {
 
   const cardWidthPct = 100 / visibleCount;
 
-  const handleDragEnd = (_: unknown, info: { offset: { x: number } }) => {
-    if (info.offset.x < -30 && currentIndex < maxIndex) goNext();
-    else if (info.offset.x > 30 && currentIndex > 0) goPrev();
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40 && currentIndex < maxIndex) goNext();
+    else if (diff < -40 && currentIndex > 0) goPrev();
+    touchStartX.current = null;
   };
 
   return (
@@ -153,15 +158,17 @@ export default function TestimonialsSection() {
         </div>
 
         {/* Carousel */}
-        <div className="overflow-hidden">
-          <motion.div
+        <div
+          className="overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div
             className="flex"
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.1}
-            onDragEnd={handleDragEnd}
-            animate={{ x: `-${currentIndex * cardWidthPct}%` }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            style={{
+              transform: `translateX(-${currentIndex * cardWidthPct}%)`,
+              transition: "transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
           >
             {testimonials.map((t) => (
               <div
@@ -211,7 +218,7 @@ export default function TestimonialsSection() {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* Dot navigation */}
