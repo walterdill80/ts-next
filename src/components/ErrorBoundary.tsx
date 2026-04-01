@@ -2,27 +2,28 @@
 
 import React from "react";
 
-interface State {
-  hasError: boolean;
-  error: string | null;
-}
-
 export default class ErrorBoundary extends React.Component<
-  { children: React.ReactNode },
-  State
+  { children: React.ReactNode; fallback?: React.ReactNode },
+  { hasError: boolean }
 > {
-  constructor(props: { children: React.ReactNode }) {
+  constructor(props: { children: React.ReactNode; fallback?: React.ReactNode }) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error: error?.message ?? String(error) };
+  static getDerivedStateFromError(): { hasError: boolean } {
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      return null;
+      return (
+        this.props.fallback ?? (
+          <div className="flex items-center justify-center py-24 text-[hsl(0_0%_35%)] text-sm">
+            Etwas ist schiefgelaufen.
+          </div>
+        )
+      );
     }
     return this.props.children;
   }
