@@ -120,6 +120,9 @@ export default function RootLayout({
   return (
     <html lang="de" className="h-full">
       <head>
+        {/* DEBUG: eruda mobile console — remove after debugging */}
+        <script src="//cdn.jsdelivr.net/npm/eruda" />
+        <script dangerouslySetInnerHTML={{ __html: "eruda.init();" }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

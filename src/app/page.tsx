@@ -7,21 +7,24 @@ import TeamSection from "@/components/landing/TeamSection";
 import FaqSection from "@/components/landing/FaqSection";
 import CtaSection from "@/components/landing/CtaSection";
 import Footer from "@/components/landing/Footer";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export default function HomePage() {
   return (
     <>
       <Navigation />
-      <main>
-        <HeroSection />
-        <FeaturesSection />
-        <PricingSection />
-        <TestimonialsSection />
-        <TeamSection />
-        <FaqSection />
-        <CtaSection />
-      </main>
-      <Footer />
+      <ErrorBoundary>
+        <main>
+          <HeroSection />
+          <FeaturesSection />
+          <PricingSection />
+          <TestimonialsSection />
+          <TeamSection />
+          <FaqSection />
+          <CtaSection />
+        </main>
+        <Footer />
+      </ErrorBoundary>
     </>
   );
 }
