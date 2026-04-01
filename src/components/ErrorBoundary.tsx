@@ -22,31 +22,7 @@ export default class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: "#0a0a0a",
-            color: "#fff",
-            padding: "24px",
-            zIndex: 9999,
-            fontFamily: "monospace",
-            fontSize: "14px",
-            overflowY: "auto",
-          }}
-        >
-          <div style={{ color: "#f87171", fontWeight: "bold", marginBottom: "12px" }}>
-            RENDER ERROR — DEBUG MODE
-          </div>
-          <pre style={{ whiteSpace: "pre-wrap", color: "#fca5a5" }}>
-            {this.state.error}
-          </pre>
-        </div>
-      );
+      return null;
     }
     return this.props.children;
   }
