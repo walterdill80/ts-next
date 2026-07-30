@@ -73,13 +73,13 @@ export default function FeaturesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-20">
-          <p className="text-xs font-semibold text-[hsl(43_48%_59%)] uppercase tracking-widest mb-3">
+          <p className="text-xs font-semibold text-[var(--gold)] uppercase tracking-widest mb-3">
             Features
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[hsl(0_0%_90%)] mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--ts-heading)] mb-4">
             Alles integriert. Alles verbunden.
           </h2>
-          <p className="text-[hsl(0_0%_55%)] max-w-xl mx-auto leading-relaxed">
+          <p className="text-[var(--ts-text-muted)] max-w-xl mx-auto leading-relaxed">
             Entdecke die Bausteine des Trading Strategen Ökosystems — abgestimmt,
             integriert und professionell.
           </p>
@@ -101,23 +101,23 @@ export default function FeaturesSection() {
                 <div className={!isEven ? "lg:col-start-2" : ""}>
                   <div className="flex items-center gap-2 mb-3">
                     <div className="p-2 rounded-md bg-[hsl(43_48%_59%/0.1)] border border-[hsl(43_48%_59%/0.2)]">
-                      <Icon className="w-4 h-4 text-[hsl(43_48%_59%)]" />
+                      <Icon className="w-4 h-4 text-[var(--gold)]" />
                     </div>
-                    <span className="text-[10px] font-semibold text-[hsl(43_48%_55%)] uppercase tracking-widest">
+                    <span className="text-[10px] font-semibold text-[var(--gold)] uppercase tracking-widest">
                       {feature.label}
                     </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-[hsl(0_0%_90%)] mb-4">
+                  <h3 className="text-2xl sm:text-3xl font-bold text-[var(--ts-heading)] mb-4">
                     {feature.title}
                   </h3>
-                  <p className="text-[hsl(0_0%_55%)] leading-relaxed text-base max-w-md">
+                  <p className="text-[var(--ts-text-muted)] leading-relaxed text-base max-w-md">
                     {feature.description}
                   </p>
                 </div>
 
                 {/* Visual */}
                 <div className={!isEven ? "lg:col-start-1 lg:row-start-1" : ""}>
-                  <div className="rounded-xl border border-[hsl(0_0%_12%)] bg-[hsl(0_0%_4%)] p-5 overflow-hidden">
+                  <div className="rounded-xl border border-[var(--ts-border-base)] bg-[var(--ts-surface-card)] p-5 overflow-hidden">
                     {feature.visual}
                   </div>
                 </div>
@@ -141,22 +141,22 @@ function VelgoVisual() {
   ];
   return (
     <div className="space-y-2">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] mb-3 uppercase tracking-widest">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] mb-3 uppercase tracking-widest">
         Velgo.AI Workflow
       </p>
       {steps.map((step, i) => (
         <div
           key={step}
-          className="flex items-center gap-3 p-3 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+          className="flex items-center gap-3 p-3 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
         >
           <div className="w-5 h-5 rounded-full bg-[hsl(43_48%_59%/0.15)] border border-[hsl(43_48%_59%/0.3)] flex items-center justify-center flex-shrink-0">
-            <span className="text-[10px] font-bold text-[hsl(43_48%_65%)]">
+            <span className="text-[10px] font-bold text-[var(--gold-bright)]">
               {i + 1}
             </span>
           </div>
-          <span className="text-xs text-[hsl(0_0%_65%)]">{step}</span>
+          <span className="text-xs text-[var(--ts-text-nav)]">{step}</span>
           {i < steps.length - 1 && (
-            <div className="ml-auto w-3 h-0.5 bg-[hsl(0_0%_18%)]" />
+            <div className="ml-auto w-3 h-0.5 bg-[var(--ts-border-strong)]" />
           )}
         </div>
       ))}
@@ -173,32 +173,32 @@ function EAVisual() {
   ];
   return (
     <div className="space-y-2">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] mb-3 uppercase tracking-widest">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] mb-3 uppercase tracking-widest">
         Aktive Expert Advisors
       </p>
       {eas.map((ea) => (
         <div
           key={ea.name}
-          className="flex items-center justify-between p-3 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+          className="flex items-center justify-between p-3 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
         >
           <div className="flex items-center gap-2.5">
             <div
               className={`w-2 h-2 rounded-full flex-shrink-0 ${
                 ea.status === "Aktiv"
                   ? "bg-[hsl(120_50%_50%)]"
-                  : "bg-[hsl(0_0%_30%)]"
+                  : "bg-[var(--ts-border-strong)]"
               }`}
             />
             <div>
-              <p className="text-xs text-[hsl(0_0%_75%)]">{ea.name}</p>
-              <p className="text-[10px] text-[hsl(0_0%_35%)]">{ea.pair}</p>
+              <p className="text-xs text-[var(--ts-text-body)]">{ea.name}</p>
+              <p className="text-[10px] text-[var(--ts-text-ghost)]">{ea.pair}</p>
             </div>
           </div>
           <span
             className={`text-xs font-medium ${
               ea.status === "Aktiv"
-                ? "text-[hsl(120_50%_55%)]"
-                : "text-[hsl(0_0%_35%)]"
+                ? "text-[hsl(120_50%_40%)]"
+                : "text-[var(--ts-text-ghost)]"
             }`}
           >
             {ea.pnl}
@@ -212,13 +212,12 @@ function EAVisual() {
 function AnalyticsVisual() {
   return (
     <div className="space-y-3">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] uppercase tracking-widest">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] uppercase tracking-widest">
         Monte-Carlo Simulation
       </p>
       {/* Chart area */}
-      <div className="h-28 rounded-lg bg-[hsl(0_0%_6%)] border border-[hsl(0_0%_10%)] p-3 relative overflow-hidden">
+      <div className="h-28 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-faint)] p-3 relative overflow-hidden">
         <svg viewBox="0 0 300 80" className="w-full h-full" preserveAspectRatio="none">
-          {/* Multiple simulation curves */}
           {[
             "M0,70 L40,55 L80,45 L120,38 L180,25 L240,18 L300,10",
             "M0,70 L40,58 L80,50 L120,42 L180,30 L240,22 L300,14",
@@ -233,7 +232,6 @@ function AnalyticsVisual() {
               fill="none"
             />
           ))}
-          {/* Worst case */}
           <path
             d="M0,70 L40,68 L80,65 L120,62 L180,58 L240,55 L300,52"
             stroke="hsl(0 60% 55% / 0.5)"
@@ -246,15 +244,15 @@ function AnalyticsVisual() {
       {/* Metrics */}
       <div className="grid grid-cols-3 gap-2">
         {[
-          { label: "Median", value: "+38.4%", color: "hsl(43 48% 65%)" },
-          { label: "Best Case", value: "+62.1%", color: "hsl(120 50% 55%)" },
-          { label: "Worst Case", value: "-12.3%", color: "hsl(0 60% 55%)" },
+          { label: "Median", value: "+38.4%", color: "hsl(43 55% 42%)" },
+          { label: "Best Case", value: "+62.1%", color: "hsl(120 50% 38%)" },
+          { label: "Worst Case", value: "-12.3%", color: "hsl(0 60% 45%)" },
         ].map((m) => (
           <div
             key={m.label}
-            className="p-2 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+            className="p-2 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
           >
-            <p className="text-[9px] text-[hsl(0_0%_35%)]">{m.label}</p>
+            <p className="text-[9px] text-[var(--ts-text-ghost)]">{m.label}</p>
             <p className="text-xs font-semibold mt-0.5" style={{ color: m.color }}>
               {m.value}
             </p>
@@ -268,23 +266,23 @@ function AnalyticsVisual() {
 function CopyVisual() {
   return (
     <div className="space-y-3">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] uppercase tracking-widest">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] uppercase tracking-widest">
         Copy-Master Konten
       </p>
       {/* Master account */}
       <div className="p-3 rounded-lg bg-[hsl(43_48%_59%/0.08)] border border-[hsl(43_48%_59%/0.2)]">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-[hsl(43_48%_65%)]">
+            <p className="text-xs font-semibold text-[var(--gold-bright)]">
               Master Account
             </p>
-            <p className="text-[10px] text-[hsl(0_0%_40%)] mt-0.5">
+            <p className="text-[10px] text-[var(--ts-text-subtle)] mt-0.5">
               #102847 · MT5
             </p>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="w-1.5 h-1.5 rounded-full bg-[hsl(120_50%_50%)] animate-pulse" />
-            <span className="text-[10px] text-[hsl(120_50%_55%)]">Sync</span>
+            <span className="text-[10px] text-[hsl(120_50%_40%)]">Sync</span>
           </div>
         </div>
       </div>
@@ -297,17 +295,17 @@ function CopyVisual() {
         ].map((acc) => (
           <div
             key={acc.id}
-            className="flex items-center justify-between p-2.5 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+            className="flex items-center justify-between p-2.5 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
           >
             <div className="flex items-center gap-2">
               <div
                 className={`w-1.5 h-1.5 rounded-full ${
-                  acc.sync ? "bg-[hsl(120_50%_50%)]" : "bg-[hsl(0_0%_30%)]"
+                  acc.sync ? "bg-[hsl(120_50%_50%)]" : "bg-[var(--ts-border-strong)]"
                 }`}
               />
-              <span className="text-xs text-[hsl(0_0%_65%)]">{acc.label}</span>
+              <span className="text-xs text-[var(--ts-text-nav)]">{acc.label}</span>
             </div>
-            <span className="text-[10px] text-[hsl(0_0%_35%)]">{acc.id}</span>
+            <span className="text-[10px] text-[var(--ts-text-ghost)]">{acc.id}</span>
           </div>
         ))}
       </div>
@@ -323,23 +321,23 @@ function EducationVisual() {
   ];
   return (
     <div className="space-y-3">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] uppercase tracking-widest">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] uppercase tracking-widest">
         Masterclass Fortschritt
       </p>
       {courses.map((course) => (
         <div
           key={course.name}
-          className="p-3 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+          className="p-3 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-[hsl(0_0%_70%)]">{course.name}</span>
-            <span className="text-[10px] text-[hsl(43_48%_59%)]">
+            <span className="text-xs text-[var(--ts-text-nav)]">{course.name}</span>
+            <span className="text-[10px] text-[var(--gold)]">
               {course.progress}%
             </span>
           </div>
-          <div className="h-1.5 rounded-full bg-[hsl(0_0%_12%)] overflow-hidden">
+          <div className="h-1.5 rounded-full bg-[var(--ts-border-base)] overflow-hidden">
             <div
-              className="h-full rounded-full bg-[hsl(43_48%_59%)]"
+              className="h-full rounded-full bg-[var(--gold)]"
               style={{ width: `${course.progress}%` }}
             />
           </div>
@@ -372,30 +370,30 @@ function CommunityVisual() {
   ];
   return (
     <div className="space-y-2">
-      <p className="text-[10px] text-[hsl(0_0%_35%)] uppercase tracking-widest mb-3">
+      <p className="text-[10px] text-[var(--ts-text-ghost)] uppercase tracking-widest mb-3">
         Community Feed
       </p>
       {posts.map((post, i) => (
         <div
           key={i}
-          className="p-3 rounded-lg bg-[hsl(0_0%_7%)] border border-[hsl(0_0%_11%)]"
+          className="p-3 rounded-lg bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)]"
         >
           <div className="flex items-start gap-2.5">
             <div className="w-7 h-7 rounded-full bg-[hsl(43_48%_59%/0.15)] border border-[hsl(43_48%_59%/0.3)] flex items-center justify-center flex-shrink-0">
-              <span className="text-[10px] font-bold text-[hsl(43_48%_65%)]">
+              <span className="text-[10px] font-bold text-[var(--gold-bright)]">
                 {post.user}
               </span>
             </div>
             <div className="flex-1 min-w-0">
               <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] font-medium text-[hsl(0_0%_65%)]">
+                <span className="text-[10px] font-medium text-[var(--ts-text-nav)]">
                   {post.name}
                 </span>
-                <span className="text-[9px] text-[hsl(0_0%_30%)]">
+                <span className="text-[9px] text-[var(--ts-text-ghost)]">
                   {post.time}
                 </span>
               </div>
-              <p className="text-[10px] text-[hsl(0_0%_50%)] leading-relaxed">
+              <p className="text-[10px] text-[var(--ts-text-muted)] leading-relaxed">
                 {post.text}
               </p>
             </div>

@@ -74,10 +74,10 @@ function CellValue({ value, popular }: { value: Val; popular?: boolean }) {
       <span
         className={`text-[13px] font-medium ${
           value === "–"
-            ? "text-[hsl(0_0%_22%)]"
+            ? "text-[var(--ts-text-trace)]"
             : popular
-            ? "text-[hsl(43_48%_65%)]"
-            : "text-[hsl(0_0%_75%)]"
+            ? "text-[var(--gold-bright)]"
+            : "text-[var(--ts-text-body)]"
         }`}
       >
         {value}
@@ -87,10 +87,10 @@ function CellValue({ value, popular }: { value: Val; popular?: boolean }) {
   if (value) {
     return (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mx-auto">
-        <circle cx="8" cy="8" r="7.5" stroke="hsl(43 48% 59%)" strokeWidth="1" />
+        <circle cx="8" cy="8" r="7.5" stroke="var(--gold)" strokeWidth="1" />
         <path
           d="M4.5 8l2.5 2.5 4.5-4.5"
-          stroke="hsl(43 48% 59%)"
+          stroke="var(--gold)"
           strokeWidth="1.5"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -100,10 +100,10 @@ function CellValue({ value, popular }: { value: Val; popular?: boolean }) {
   }
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mx-auto">
-      <circle cx="8" cy="8" r="7.5" stroke="hsl(0 0% 18%)" strokeWidth="1" />
+      <circle cx="8" cy="8" r="7.5" stroke="var(--ts-border-strong)" strokeWidth="1" />
       <path
         d="M5.5 10.5l5-5M10.5 10.5l-5-5"
-        stroke="hsl(0 0% 28%)"
+        stroke="var(--ts-border-strong)"
         strokeWidth="1.2"
         strokeLinecap="round"
       />
@@ -123,26 +123,26 @@ export default function PricingSection() {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-semibold text-[hsl(43_48%_59%)] tracking-[0.15em] uppercase">
+          <span className="text-xs font-semibold text-[var(--gold)] tracking-[0.15em] uppercase">
             Preise
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[hsl(0_0%_90%)] mt-4">
+          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--ts-heading)] mt-4">
             Einfache Preise.
           </h2>
-          <p className="text-[hsl(0_0%_45%)] mt-2 text-[15px]">
+          <p className="text-[var(--ts-text-subtle)] mt-2 text-[15px]">
             Jederzeit upgraden oder kündigen.
           </p>
 
-          {/* Billing toggle — rounded-full pill style */}
-          <div className="inline-flex items-center bg-[hsl(0_0%_6%)] border border-[hsl(0_0%_12%)] rounded-full p-1 gap-1 mt-7">
+          {/* Billing toggle */}
+          <div className="inline-flex items-center bg-[var(--ts-surface-item)] border border-[var(--ts-border-base)] rounded-full p-1 gap-1 mt-7">
             {(["monthly", "yearly"] as const).map((b) => (
               <button
                 key={b}
                 onClick={() => setBilling(b)}
                 className={`px-5 py-[7px] rounded-full text-[13px] font-medium transition-all duration-200 ${
                   billing === b
-                    ? "bg-[hsl(43_48%_59%)] text-[hsl(0_0%_2%)]"
-                    : "text-[hsl(0_0%_45%)] hover:text-[hsl(0_0%_70%)]"
+                    ? "bg-[var(--gold)] text-[hsl(0_0%_98%)]"
+                    : "text-[var(--ts-text-subtle)] hover:text-[var(--ts-text-nav)]"
                 }`}
               >
                 {b === "monthly" ? "Monatlich" : "Jährlich"}
@@ -150,8 +150,8 @@ export default function PricingSection() {
                   <span
                     className={`ml-1.5 text-[11px] font-bold ${
                       billing === "yearly"
-                        ? "text-[hsl(0_0%_2%)]"
-                        : "text-[hsl(43_48%_59%)]"
+                        ? "text-[hsl(0_0%_98%)]"
+                        : "text-[var(--gold)]"
                     }`}
                   >
                     -17%
@@ -169,20 +169,20 @@ export default function PricingSection() {
               key={plan.id}
               className={`relative rounded-2xl p-6 border ${
                 plan.popular
-                  ? "bg-[hsl(0_0%_5%)] border-[hsl(43_48%_59%)]"
-                  : "bg-[hsl(0_0%_4%)] border-[hsl(0_0%_12%)]"
+                  ? "bg-[var(--ts-surface-card)] border-[var(--gold)]"
+                  : "bg-[var(--ts-surface-card)] border-[var(--ts-border-base)]"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[hsl(43_48%_59%)] text-[hsl(0_0%_2%)] text-[10px] font-bold px-3 py-[3px] rounded-full tracking-[0.1em] uppercase whitespace-nowrap">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[var(--gold)] text-[hsl(0_0%_98%)] text-[10px] font-bold px-3 py-[3px] rounded-full tracking-[0.1em] uppercase whitespace-nowrap">
                   Beliebt
                 </div>
               )}
               <div
                 className={`text-[11px] font-bold tracking-[0.12em] uppercase mb-3 ${
                   plan.popular
-                    ? "text-[hsl(43_48%_65%)]"
-                    : "text-[hsl(0_0%_45%)]"
+                    ? "text-[var(--gold-bright)]"
+                    : "text-[var(--ts-text-subtle)]"
                 }`}
               >
                 {plan.name}
@@ -191,26 +191,26 @@ export default function PricingSection() {
                 <span
                   className={`text-[32px] font-bold ${
                     plan.popular
-                      ? "text-[hsl(43_48%_65%)]"
-                      : "text-[hsl(0_0%_88%)]"
+                      ? "text-[var(--gold-bright)]"
+                      : "text-[var(--ts-heading)]"
                   }`}
                 >
                   {plan.price === 0 ? "Gratis" : `${getPrice(plan.price)}€`}
                 </span>
                 {plan.price > 0 && (
-                  <span className="text-[13px] text-[hsl(0_0%_38%)]">/Mo</span>
+                  <span className="text-[13px] text-[var(--ts-text-dim)]">/Mo</span>
                 )}
               </div>
               {billing === "yearly" && plan.price > 0 && (
-                <div className="text-[11px] text-[hsl(43_48%_59%)] mt-0.5">
+                <div className="text-[11px] text-[var(--gold)] mt-0.5">
                   statt {plan.price}€ /Mo
                 </div>
               )}
               <button
-                className={`w-full mt-4 py-2.5 rounded-lg text-[13px] font-semibold transition-all duration-200 ${
+                className={`w-full mt-4 py-2.5 rounded-lg text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
                   plan.popular
-                    ? "bg-[hsl(43_48%_59%)] text-[hsl(0_0%_2%)] hover:bg-[hsl(43_48%_65%)]"
-                    : "border border-[hsl(0_0%_15%)] text-[hsl(0_0%_50%)] hover:text-[hsl(0_0%_75%)] hover:border-[hsl(0_0%_25%)]"
+                    ? "bg-[var(--gold)] text-[hsl(0_0%_98%)] hover:opacity-90"
+                    : "border border-[var(--ts-border-medium)] text-[var(--ts-text-muted)] hover:text-[var(--ts-text-nav)] hover:border-[var(--ts-border-strong)]"
                 }`}
               >
                 {plan.price === 0 ? "Kostenlos starten" : "Jetzt starten"}
@@ -224,9 +224,8 @@ export default function PricingSection() {
           <div className="min-w-[700px]">
             {featureSections.map((section, si) => (
               <div key={si} className="mb-1">
-                {/* Section title */}
                 <div className="px-5 pt-5 pb-2">
-                  <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[hsl(43_48%_59%)]">
+                  <span className="text-[11px] font-bold tracking-[0.12em] uppercase text-[var(--gold)]">
                     {section.title}
                   </span>
                 </div>
@@ -234,10 +233,10 @@ export default function PricingSection() {
                   <div
                     key={ri}
                     className={`grid grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] gap-4 px-5 py-2.5 rounded-lg items-center ${
-                      ri % 2 === 0 ? "bg-[hsl(0_0%_100%/0.015)]" : ""
+                      ri % 2 === 0 ? "bg-[var(--ts-surface-item)]" : ""
                     }`}
                   >
-                    <div className="text-[13px] text-[hsl(0_0%_50%)]">
+                    <div className="text-[13px] text-[var(--ts-text-muted)]">
                       {row.label}
                     </div>
                     {row.values.map((v, vi) => (
@@ -251,21 +250,21 @@ export default function PricingSection() {
             ))}
 
             {/* Bottom price summary */}
-            <div className="grid grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] gap-4 px-5 py-5 mt-4 border-t border-[hsl(0_0%_10%)] items-center">
+            <div className="grid grid-cols-[1.4fr_repeat(4,minmax(0,1fr))] gap-4 px-5 py-5 mt-4 border-t border-[var(--ts-border-faint)] items-center">
               <div />
               {plans.map((plan) => (
                 <div key={plan.id} className="text-center">
                   <div
                     className={`text-lg font-bold ${
                       plan.popular
-                        ? "text-[hsl(43_48%_65%)]"
-                        : "text-[hsl(0_0%_82%)]"
+                        ? "text-[var(--gold-bright)]"
+                        : "text-[var(--ts-text-strong)]"
                     }`}
                   >
                     {plan.price === 0 ? "Gratis" : `${getPrice(plan.price)}€`}
                   </div>
                   {plan.price > 0 && (
-                    <div className="text-[11px] text-[hsl(0_0%_35%)]">
+                    <div className="text-[11px] text-[var(--ts-text-ghost)]">
                       /Monat
                     </div>
                   )}
@@ -284,26 +283,26 @@ export default function PricingSection() {
                 key={plan.id}
                 className={`rounded-2xl border overflow-hidden ${
                   plan.popular
-                    ? "border-[hsl(43_48%_59%)] bg-[hsl(0_0%_5%)]"
-                    : "border-[hsl(0_0%_12%)] bg-[hsl(0_0%_4%)]"
+                    ? "border-[var(--gold)] bg-[var(--ts-surface-card)]"
+                    : "border-[var(--ts-border-base)] bg-[var(--ts-surface-card)]"
                 }`}
               >
                 <button
                   onClick={() => setOpenMobile(isOpen ? null : plan.id)}
-                  className="w-full flex items-center justify-between p-5 text-left"
+                  className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
                 >
                   <div>
                     <span
                       className={`text-sm font-bold ${
                         plan.popular
-                          ? "text-[hsl(43_48%_65%)]"
-                          : "text-[hsl(0_0%_82%)]"
+                          ? "text-[var(--gold-bright)]"
+                          : "text-[var(--ts-text-strong)]"
                       }`}
                     >
                       {plan.name}
                     </span>
                     {plan.popular && (
-                      <span className="ml-2 text-[10px] font-bold bg-[hsl(43_48%_59%/0.15)] text-[hsl(43_48%_65%)] px-2 py-0.5 rounded-full uppercase">
+                      <span className="ml-2 text-[10px] font-bold bg-[hsl(43_48%_59%/0.15)] text-[var(--gold-bright)] px-2 py-0.5 rounded-full uppercase">
                         Beliebt
                       </span>
                     )}
@@ -312,8 +311,8 @@ export default function PricingSection() {
                     <span
                       className={`text-lg font-bold ${
                         plan.popular
-                          ? "text-[hsl(43_48%_65%)]"
-                          : "text-[hsl(0_0%_82%)]"
+                          ? "text-[var(--gold-bright)]"
+                          : "text-[var(--ts-text-strong)]"
                       }`}
                     >
                       {plan.price === 0
@@ -321,7 +320,7 @@ export default function PricingSection() {
                         : `${getPrice(plan.price)}€/Mo`}
                     </span>
                     <svg
-                      className={`w-4 h-4 text-[hsl(0_0%_38%)] transition-transform duration-300 ${
+                      className={`w-4 h-4 text-[var(--ts-text-dim)] transition-transform duration-300 ${
                         isOpen ? "rotate-180" : ""
                       }`}
                       fill="none"
@@ -346,7 +345,7 @@ export default function PricingSection() {
                   <div className="px-5 pb-5 space-y-1">
                     {featureSections.map((section, si) => (
                       <div key={si}>
-                        <div className="text-[10px] font-bold tracking-[0.12em] uppercase text-[hsl(43_48%_59%/0.6)] mb-2 mt-4 first:mt-0">
+                        <div className="text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--gold)] opacity-70 mb-2 mt-4 first:mt-0">
                           {section.title}
                         </div>
                         {section.rows.map((row, ri) => {
@@ -361,7 +360,7 @@ export default function PricingSection() {
                                 !included ? "opacity-30" : ""
                               }`}
                             >
-                              <span className="text-[12px] text-[hsl(0_0%_50%)]">
+                              <span className="text-[12px] text-[var(--ts-text-muted)]">
                                 {row.label}
                               </span>
                               <div className="ml-2 shrink-0">

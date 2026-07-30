@@ -24,6 +24,77 @@
   --gold-bright: hsl(43 60% 72%);
   --surface: hsl(0 0% 6%);
   --surface-hover: hsl(0 0% 9%);
+
+  /* TS UI tokens — dark defaults */
+  --ts-heading: hsl(0 0% 90%);
+  --ts-text-strong: hsl(0 0% 82%);
+  --ts-text-body: hsl(0 0% 72%);
+  --ts-text-nav: hsl(0 0% 65%);
+  --ts-text-muted: hsl(0 0% 55%);
+  --ts-text-subtle: hsl(0 0% 45%);
+  --ts-text-dim: hsl(0 0% 38%);
+  --ts-text-ghost: hsl(0 0% 30%);
+  --ts-text-trace: hsl(0 0% 22%);
+
+  --ts-surface-page: hsl(0 0% 2%);
+  --ts-surface-card: hsl(0 0% 4%);
+  --ts-surface-item: hsl(0 0% 7%);
+  --ts-surface-hover: hsl(0 0% 9%);
+
+  --ts-border-faint: hsl(0 0% 10%);
+  --ts-border-base: hsl(0 0% 12%);
+  --ts-border-medium: hsl(0 0% 15%);
+  --ts-border-strong: hsl(0 0% 18%);
+
+  --ts-nav-bg: hsl(0 0% 2% / 0.95);
+}
+
+/* ── Light theme ───────────────────────────────────────────── */
+[data-theme="light"] {
+  --background: hsl(0 0% 98%);
+  --foreground: hsl(0 0% 8%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 8%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(0 0% 8%);
+  --primary: hsl(43 65% 35%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(0 0% 94%);
+  --secondary-foreground: hsl(0 0% 8%);
+  --muted: hsl(0 0% 92%);
+  --muted-foreground: hsl(0 0% 40%);
+  --accent: hsl(43 65% 35%);
+  --accent-foreground: hsl(0 0% 98%);
+  --border: hsl(0 0% 87%);
+  --input: hsl(0 0% 87%);
+  --ring: hsl(43 65% 35%);
+  --gold: hsl(43 65% 35%);
+  --gold-bright: hsl(43 70% 30%);
+  --surface: hsl(0 0% 97%);
+  --surface-hover: hsl(0 0% 93%);
+
+  /* TS UI tokens — light overrides */
+  --ts-heading: hsl(0 0% 8%);
+  --ts-text-strong: hsl(0 0% 12%);
+  --ts-text-body: hsl(0 0% 22%);
+  --ts-text-nav: hsl(0 0% 30%);
+  --ts-text-muted: hsl(0 0% 40%);
+  --ts-text-subtle: hsl(0 0% 46%);
+  --ts-text-dim: hsl(0 0% 50%);
+  --ts-text-ghost: hsl(0 0% 58%);
+  --ts-text-trace: hsl(0 0% 66%);
+
+  --ts-surface-page: hsl(0 0% 98%);
+  --ts-surface-card: hsl(0 0% 100%);
+  --ts-surface-item: hsl(0 0% 96%);
+  --ts-surface-hover: hsl(0 0% 92%);
+
+  --ts-border-faint: hsl(0 0% 91%);
+  --ts-border-base: hsl(0 0% 87%);
+  --ts-border-medium: hsl(0 0% 83%);
+  --ts-border-strong: hsl(0 0% 78%);
+
+  --ts-nav-bg: hsl(0 0% 98% / 0.95);
 }
 
 @theme inline {
@@ -73,7 +144,7 @@
 
 @layer utilities {
   .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(43 48% 59%), hsl(43 60% 72%));
+    background: linear-gradient(135deg, var(--gold), var(--gold-bright));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -86,6 +157,19 @@
   }
   .bg-surface {
     background-color: var(--surface);
+  }
+  /* Logo invert for light mode */
+  [data-theme="light"] .ts-logo {
+    filter: invert(1) brightness(0.15);
+  }
+  .ts-theme-toggle .ts-theme-icon-moon {
+    display: none;
+  }
+  [data-theme="light"] .ts-theme-toggle .ts-theme-icon-sun {
+    display: none;
+  }
+  [data-theme="light"] .ts-theme-toggle .ts-theme-icon-moon {
+    display: block;
   }
 }
 
@@ -103,4 +187,38 @@
 }
 .animate-slide-up {
   animation: slide-up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+.ts-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.ts-faq-item[open] {
+  border-color: hsl(43 48% 59% / 0.3);
+  background: hsl(43 48% 59% / 0.03);
+}
+
+.ts-faq-item[open] .faq-chevron {
+  transform: rotate(180deg);
+  color: var(--gold);
+}
+
+@media (max-width: 767px), (hover: none) and (pointer: coarse) {
+  .ts-mobile-glow-heavy {
+    filter: blur(72px) !important;
+    opacity: 0.75;
+  }
+
+  .ts-mobile-glow-medium {
+    filter: blur(56px) !important;
+    opacity: 0.8;
+  }
+
+  .ts-mobile-static-motion {
+    animation: none !important;
+  }
+
+  .animate-pulse {
+    animation: none !important;
+  }
 }

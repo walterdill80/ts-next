@@ -1,17 +1,17 @@
 export default function HeroVisual() {
   return (
-    <div className="relative animate-slide-up">
+    <div className="relative animate-slide-up ts-mobile-static-motion">
       {/* Browser chrome */}
-      <div className="relative rounded-2xl border border-[hsl(0_0%_12%/0.5)] bg-[hsl(0_0%_4%/0.8)] backdrop-blur-sm overflow-hidden shadow-2xl">
+      <div className="relative rounded-2xl border border-[var(--ts-border-base)] bg-[var(--ts-surface-card)] overflow-hidden shadow-2xl">
         {/* Browser bar */}
-        <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[hsl(0_0%_10%/0.5)]">
+        <div className="flex items-center gap-2 px-5 py-3.5 border-b border-[var(--ts-border-faint)]">
           <div className="flex gap-1.5">
-            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(0_0%_20%/0.6)]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(0_0%_20%/0.6)]" />
-            <div className="w-2.5 h-2.5 rounded-full bg-[hsl(0_0%_20%/0.6)]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[var(--ts-border-strong)]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[var(--ts-border-strong)]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[var(--ts-border-strong)]" />
           </div>
           <div className="flex-1 flex justify-center">
-            <div className="px-4 py-1 rounded-md bg-[hsl(0_0%_8%/0.5)] text-[11px] text-[hsl(0_0%_28%)]">
+            <div className="px-4 py-1 rounded-md bg-[var(--ts-surface-item)] text-[11px] text-[var(--ts-text-ghost)]">
               app.trading-strategen.com
             </div>
           </div>
@@ -26,8 +26,8 @@ export default function HeroVisual() {
                 key={item}
                 className={`px-3 py-2.5 rounded-lg text-xs font-medium transition-colors ${
                   i === 0
-                    ? "bg-[hsl(43_48%_59%/0.1)] text-[hsl(43_48%_65%)]"
-                    : "text-[hsl(0_0%_28%)]"
+                    ? "bg-[hsl(43_48%_59%/0.1)] text-[var(--gold-bright)]"
+                    : "text-[var(--ts-text-ghost)]"
                 }`}
               >
                 {item}
@@ -37,9 +37,9 @@ export default function HeroVisual() {
 
           {/* Main Area */}
           <div className="col-span-12 lg:col-span-7 flex flex-col gap-4">
-            <div className="flex-1 rounded-xl bg-[hsl(0_0%_8%/0.5)] p-5 relative overflow-hidden">
+            <div className="flex-1 rounded-xl bg-[var(--ts-surface-item)] p-5 relative overflow-hidden">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-xs text-[hsl(0_0%_38%)] font-medium">
+                <span className="text-xs text-[var(--ts-text-dim)] font-medium">
                   Performance
                 </span>
                 <div className="flex gap-2">
@@ -48,8 +48,8 @@ export default function HeroVisual() {
                       key={t}
                       className={`text-[10px] px-2 py-0.5 rounded ${
                         t === "3M"
-                          ? "bg-[hsl(43_48%_59%/0.1)] text-[hsl(43_48%_65%)]"
-                          : "text-[hsl(0_0%_22%)]"
+                          ? "bg-[hsl(43_48%_59%/0.1)] text-[var(--gold-bright)]"
+                          : "text-[var(--ts-text-trace)]"
                       }`}
                     >
                       {t}
@@ -86,12 +86,12 @@ export default function HeroVisual() {
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-lg bg-[hsl(0_0%_8%/0.5)] p-3 text-center"
+                  className="rounded-lg bg-[var(--ts-surface-item)] p-3 text-center"
                 >
-                  <div className="text-[10px] text-[hsl(0_0%_32%)] mb-1">
+                  <div className="text-[10px] text-[var(--ts-text-ghost)] mb-1">
                     {stat.label}
                   </div>
-                  <div className="text-sm font-semibold text-[hsl(0_0%_82%)]">
+                  <div className="text-sm font-semibold text-[var(--ts-text-strong)]">
                     {stat.value}
                   </div>
                 </div>
@@ -101,14 +101,14 @@ export default function HeroVisual() {
 
           {/* Right Panel */}
           <div className="col-span-3 hidden lg:flex flex-col gap-3">
-            <div className="rounded-xl bg-[hsl(0_0%_8%/0.5)] p-4 flex-1">
-              <span className="text-[10px] text-[hsl(0_0%_30%)] font-medium">
+            <div className="rounded-xl bg-[var(--ts-surface-item)] p-4 flex-1">
+              <span className="text-[10px] text-[var(--ts-text-ghost)] font-medium">
                 Active EAs
               </span>
               <div className="mt-3 space-y-2.5">
                 {["Range-Breakout", "Trend-Follow", "Scalper V2"].map((ea, i) => (
                   <div key={ea} className="flex items-center justify-between">
-                    <span className="text-[11px] text-[hsl(0_0%_45%)]">{ea}</span>
+                    <span className="text-[11px] text-[var(--ts-text-subtle)]">{ea}</span>
                     <div
                       className={`w-1.5 h-1.5 rounded-full ${
                         i < 2
@@ -124,7 +124,7 @@ export default function HeroVisual() {
               <span className="text-[10px] text-[hsl(43_48%_59%/0.6)] font-medium">
                 Velgo.AI
               </span>
-              <p className="text-[11px] text-[hsl(0_0%_30%)] mt-2 leading-relaxed">
+              <p className="text-[11px] text-[var(--ts-text-ghost)] mt-2 leading-relaxed">
                 3 Projekte aktiv
               </p>
             </div>
@@ -134,7 +134,7 @@ export default function HeroVisual() {
 
       {/* Glow below */}
       <div
-        className="absolute -bottom-24 left-1/2 -translate-x-1/2 w-[60%] h-40 blur-[100px] rounded-full pointer-events-none"
+        className="ts-mobile-glow-medium absolute -bottom-24 left-1/2 -translate-x-1/2 w-[60%] h-40 blur-[100px] rounded-full pointer-events-none"
         style={{ background: "hsl(43 48% 59% / 0.04)" }}
       />
     </div>

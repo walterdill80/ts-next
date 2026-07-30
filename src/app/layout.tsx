@@ -1,5 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   title: "Trading Strategen — Strategie. Software. Automation. Education.",
@@ -52,7 +57,7 @@ const organizationSchema = {
     "https://www.instagram.com/trading_strategen/",
     "https://www.youtube.com/@Trading-Strategen",
     "https://www.tiktok.com/@trading_strategen",
-    "https://discord.com/invite/tradingstrategen",
+    "https://discord.gg/tradingstrategen",
     "https://t.me/tradingsignaleSP500",
   ],
 };
@@ -120,6 +125,12 @@ export default function RootLayout({
   return (
     <html lang="de" className="h-full">
       <head>
+        {/* Anti-flash: apply stored theme before first paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('ts-theme');if(t==='light')document.documentElement.dataset.theme='light';}catch(e){}})()`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

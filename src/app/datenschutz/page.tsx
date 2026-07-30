@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "@/assets/TS_Logo_White.png";
+import ConsentManager from "@/components/ConsentManager";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung — Trading Strategen",
@@ -352,6 +353,8 @@ export default function DatenschutzPage() {
             </a>
           </p>
         </div>
+
+        <ConsentManager />
       </main>
 
       <footer className="border-t border-[hsl(0_0%_10%)] py-6">

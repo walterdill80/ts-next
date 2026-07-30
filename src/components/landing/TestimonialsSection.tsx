@@ -45,27 +45,46 @@ export default function TestimonialsSection() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const [direction, setDirection] = useState(1);
+  const [canAutoPlay, setCanAutoPlay] = useState(false);
 
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const resumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
-    const update = () => setVisibleCount(getVisibleCount(window.innerWidth));
+    const finePointerQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => {
+      setVisibleCount(getVisibleCount(window.innerWidth));
+      setCanAutoPlay(
+        window.innerWidth >= 768 &&
+          finePointerQuery.matches &&
+          !reducedMotionQuery.matches
+      );
+    };
+
     update();
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    finePointerQuery.addEventListener?.("change", update);
+    reducedMotionQuery.addEventListener?.("change", update);
+
+    return () => {
+      window.removeEventListener("resize", update);
+      finePointerQuery.removeEventListener?.("change", update);
+      reducedMotionQuery.removeEventListener?.("change", update);
+    };
   }, []);
 
   const maxIndex = Math.max(0, testimonials.length - visibleCount);
 
   const pauseAutoPlay = useCallback(() => {
+    if (!canAutoPlay) return;
     setIsAutoPlaying(false);
     if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
     resumeTimeoutRef.current = setTimeout(() => {
       if (!isHovered) setIsAutoPlaying(true);
     }, 8000);
-  }, [isHovered]);
+  }, [canAutoPlay, isHovered]);
 
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => {
@@ -86,7 +105,7 @@ export default function TestimonialsSection() {
   }, [maxIndex, pauseAutoPlay]);
 
   useEffect(() => {
-    if (!isAutoPlaying || isHovered) {
+    if (!canAutoPlay || !isAutoPlaying || isHovered || maxIndex === 0) {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
       return;
     }
@@ -98,7 +117,7 @@ export default function TestimonialsSection() {
       });
     }, 4000);
     return () => { if (autoPlayRef.current) clearInterval(autoPlayRef.current); };
-  }, [isAutoPlaying, isHovered, maxIndex, direction]);
+  }, [canAutoPlay, isAutoPlaying, isHovered, maxIndex, direction]);
 
   useEffect(() => () => {
     if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
@@ -122,17 +141,25 @@ export default function TestimonialsSection() {
     <section
       id="bewertungen"
       className="py-32 lg:py-48"
-      onMouseEnter={() => { setIsHovered(true); setIsAutoPlaying(false); }}
-      onMouseLeave={() => { setIsHovered(false); setIsAutoPlaying(true); }}
+      onMouseEnter={() => {
+        if (!canAutoPlay) return;
+        setIsHovered(true);
+        setIsAutoPlaying(false);
+      }}
+      onMouseLeave={() => {
+        if (!canAutoPlay) return;
+        setIsHovered(false);
+        setIsAutoPlaying(true);
+      }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header + Nav buttons */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16">
           <div>
-            <span className="text-xs font-medium text-[hsl(43_48%_59%)] tracking-widest uppercase">
+            <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">
               Bewertungen
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-[hsl(0_0%_90%)] mt-5">
+            <h2 className="text-4xl sm:text-5xl font-bold text-[var(--ts-heading)] mt-5">
               Was unsere Mitglieder sagen
             </h2>
           </div>
@@ -141,18 +168,18 @@ export default function TestimonialsSection() {
             <button
               onClick={goPrev}
               disabled={currentIndex === 0}
-              className="w-12 h-12 rounded-full border border-[hsl(0_0%_14%)] flex items-center justify-center hover:bg-[hsl(0_0%_8%)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="w-12 h-12 rounded-full border border-[var(--ts-border-medium)] flex items-center justify-center hover:bg-[var(--ts-surface-hover)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               aria-label="Zurück"
             >
-              <ChevronLeft className="w-5 h-5 text-[hsl(0_0%_65%)]" />
+              <ChevronLeft className="w-5 h-5 text-[var(--ts-text-nav)]" />
             </button>
             <button
               onClick={goNext}
               disabled={currentIndex >= maxIndex}
-              className="w-12 h-12 rounded-full border border-[hsl(0_0%_14%)] flex items-center justify-center hover:bg-[hsl(0_0%_8%)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="w-12 h-12 rounded-full border border-[var(--ts-border-medium)] flex items-center justify-center hover:bg-[var(--ts-surface-hover)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               aria-label="Weiter"
             >
-              <ChevronRight className="w-5 h-5 text-[hsl(0_0%_65%)]" />
+              <ChevronRight className="w-5 h-5 text-[var(--ts-text-nav)]" />
             </button>
           </div>
         </div>
@@ -176,12 +203,12 @@ export default function TestimonialsSection() {
                 className="px-2.5 shrink-0"
                 style={{ width: `${cardWidthPct}%` }}
               >
-                <div className="rounded-2xl border border-[hsl(0_0%_10%)] bg-[hsl(0_0%_3%)] p-8 h-full flex flex-col justify-between select-none">
+                <div className="rounded-2xl border border-[var(--ts-border-faint)] bg-[var(--ts-surface-card)] p-8 h-full flex flex-col justify-between select-none">
                   <div>
                     <div className="w-10 h-10 rounded-full bg-[hsl(43_48%_59%/0.1)] border border-[hsl(43_48%_59%/0.2)] flex items-center justify-center mb-6">
-                      <Quote className="w-5 h-5 text-[hsl(43_48%_59%)]" />
+                      <Quote className="w-5 h-5 text-[var(--gold)]" />
                     </div>
-                    <p className="text-base text-[hsl(0_0%_72%)] leading-relaxed">
+                    <p className="text-base text-[var(--ts-text-body)] leading-relaxed">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                     {t.trustpilot && (
@@ -189,7 +216,7 @@ export default function TestimonialsSection() {
                         href="https://www.trustpilot.com/review/trading-strategen.com"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-sm text-[hsl(43_48%_59%)] hover:underline mt-3"
+                        className="inline-flex items-center gap-1.5 text-sm text-[var(--gold)] hover:underline mt-3"
                       >
                         Weiterlesen auf Trustpilot
                         <ExternalLink className="w-3.5 h-3.5" />
@@ -197,7 +224,7 @@ export default function TestimonialsSection() {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-3 mt-8 pt-6 border-t border-[hsl(0_0%_9%)]">
+                  <div className="flex items-center gap-3 mt-8 pt-6 border-t border-[var(--ts-border-faint)]">
                     {t.avatar ? (
                       <Image
                         src={t.avatar}
@@ -207,11 +234,11 @@ export default function TestimonialsSection() {
                         className="rounded-full object-cover w-12 h-12"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-[hsl(43_48%_59%/0.15)] border border-[hsl(43_48%_59%/0.2)] flex items-center justify-center text-[hsl(43_48%_65%)] font-semibold text-lg flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-[hsl(43_48%_59%/0.15)] border border-[hsl(43_48%_59%/0.2)] flex items-center justify-center text-[var(--gold-bright)] font-semibold text-lg flex-shrink-0">
                         {t.name.charAt(0)}
                       </div>
                     )}
-                    <p className="text-sm font-semibold text-[hsl(0_0%_82%)]">
+                    <p className="text-sm font-semibold text-[var(--ts-text-strong)]">
                       {t.name}
                     </p>
                   </div>
@@ -229,8 +256,8 @@ export default function TestimonialsSection() {
               onClick={() => { setCurrentIndex(i); pauseAutoPlay(); }}
               className={`rounded-full transition-all duration-300 ${
                 i === currentIndex
-                  ? "w-5 h-2 bg-[hsl(43_48%_59%)]"
-                  : "w-2 h-2 bg-[hsl(0_0%_18%)] hover:bg-[hsl(0_0%_30%)]"
+                  ? "w-5 h-2 bg-[var(--gold)]"
+                  : "w-2 h-2 bg-[var(--ts-border-strong)] hover:bg-[var(--ts-text-ghost)]"
               }`}
               aria-label={`Slide ${i + 1}`}
             />
